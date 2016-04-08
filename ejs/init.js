@@ -22,10 +22,12 @@ var UNIT_DEFAULT_SPEED = 10;	//a játékos sebességének mindig a MAP_ELEMENT_S
 var gamediv;
 var mapCanvas;
 var unitCanvas;
+var missileCanvas;
 var mouseCanvas;
 var devCanvas;
 var mapCanvasContext;
 var unitcanvasContext;
+var missilecanvasContext;
 var mousecanvasContext;
 var devcanvasContenxt;
 
@@ -105,6 +107,20 @@ function init() {
 			console.log('Error: unitCanvas element is null!');
 		}		
 		
+		missileCanvas = document.getElementById('missilecanvas');		
+		if(missileCanvas != null) {			
+			missileCanvas.style.top = gamedivTop + 'px';
+			missileCanvas.style.left = gamedivLeft + 'px';
+			missileCanvas.style.width = GAME_CANVAS_WIDTH + 'px';
+			missileCanvas.style.height = GAME_CANVAS_HEIGHT + 'px';
+			missilecanvasContext = missileCanvas.getContext('2d');	
+			missilecanvasContext.canvas.width  = GAME_CANVAS_WIDTH;
+			missilecanvasContext.canvas.height = GAME_CANVAS_HEIGHT;
+			missilecanvasContext.scale(1, 1);			
+		} else {
+			console.log('Error: missileCanvas element is null!');
+		}
+		
 		if(DEV_CANVAS_ENABLED) {
 			devCanvas = document.getElementById('devcanvas');		
 			if(devCanvas != null) {			
@@ -121,20 +137,22 @@ function init() {
 			}
 		}
 
-		mouseCanvas = document.getElementById('mousecanvas');		
-		if(mouseCanvas != null) {			
-			mouseCanvas.style.top = gamedivTop + 'px';
-			mouseCanvas.style.left = gamedivLeft + 'px';
-			mouseCanvas.style.width = GAME_CANVAS_WIDTH + 'px';
-			mouseCanvas.style.height = GAME_CANVAS_HEIGHT + 'px';
-			mousecanvasContext = mouseCanvas.getContext('2d');	
-			mousecanvasContext.canvas.width  = GAME_CANVAS_WIDTH;
-			mousecanvasContext.canvas.height = GAME_CANVAS_HEIGHT;
-			mousecanvasContext.scale(1, 1);			
-		} else {
-			console.log('Error: mouseCanvas element is null!');
+		if(MOUSE_ENABLED) {
+			mouseCanvas = document.getElementById('mousecanvas');		
+			if(mouseCanvas != null) {			
+				mouseCanvas.style.top = gamedivTop + 'px';
+				mouseCanvas.style.left = gamedivLeft + 'px';
+				mouseCanvas.style.width = GAME_CANVAS_WIDTH + 'px';
+				mouseCanvas.style.height = GAME_CANVAS_HEIGHT + 'px';
+				mousecanvasContext = mouseCanvas.getContext('2d');	
+				mousecanvasContext.canvas.width  = GAME_CANVAS_WIDTH;
+				mousecanvasContext.canvas.height = GAME_CANVAS_HEIGHT;
+				mousecanvasContext.scale(1, 1);			
+			} else {
+				console.log('Error: mouseCanvas element is null!');
+			}
 		}
-	}	
+	}
 }
 
 function setFullScreenCanvas(canvasElement) {	
@@ -146,7 +164,7 @@ function setFullScreenCanvas(canvasElement) {
 	}            
 }
 
-function initMap(map) {	
+function inigameMap(map) {	
 	var worldX = 0;
 	var worldY = 0;
 	var mapOffsetX = 0;
@@ -233,7 +251,7 @@ function gameLoop() {
     delta = now - then;
 		
 	if (delta > interval) {		
-		movePlayer(player, tmap);		
+		movePlayer(player, gameMap);		
 		then = now - (delta % interval);
 	}	
 }
@@ -322,7 +340,7 @@ function radToDeg(angle) {
 window.onload = function() {
 	init();	
 	//initTileImages();
-	initMap(tmap);	
+	inigameMap(gameMap);	
 	then =  Date.now();
 	document.addEventListener("keydown", keyDownHandler, true);	
 	if(MOUSE_ENABLED) {

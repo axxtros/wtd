@@ -234,7 +234,4 @@ function drawMap(map, offsetX, offsetY) {
 		}		
 		elementY += MAP_ELEMENT_SIZE;
 	}
-	
-	
-
 }
