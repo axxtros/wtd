@@ -43,8 +43,8 @@ function createNewMissile(unit, type) {
 	missile.uy = unit.uy;
 	missile.mx = unit.mx;
 	missile.my = unit.my;
-	missile.mapOffsetx = unit.mapOffsetX;
-	missile.mapOffsety = unit.mapOffsetY;
+	missile.mapOffsetx = unit.mapOffsetx;
+	missile.mapOffsety = unit.mapOffsety;
 	missile.direction = unit.direction;
 	missile.state = 1;
 	missile.speed = type.speed;	
@@ -114,7 +114,14 @@ function collisionDetectionMissile(missile, map) {
 
 function drawMissile(player, missile) {	
 	var drawmx = missile.ux + (player.mapOffsetx * (-1));
-	var drawmy = missile.uy + (player.mapOffsety * (-1));
+	var drawmy = 0;
+	if(player.mapOffsetx === 0) {
+		drawmy = missile.uy + (player.mapOffsety * (-1));
+	} else {
+		drawmy = (missile.uy + (player.mapOffsety * (-1))) + player.mapOffsety;
+	}
+	
+	
 	missilecanvasContext.clearRect(0, 0, unitcanvas.width, unitCanvas.height);
 	if(missile.state === 1 || missile.state === 2) {
 		missilecanvasContext.drawImage(dummyMissileImage, drawmx, drawmy, missile.ch, missile.cw);

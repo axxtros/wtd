@@ -289,18 +289,15 @@ function fpsCalculation() {
 	
 	if(MOUSE_ENABLED) {
 		devcanvasContenxt.fillText('page mouse x:' + mousex, 4, 210);
-		devcanvasContenxt.fillText('page mouse y:' + mousey, 4, 220);
-		
+		devcanvasContenxt.fillText('page mouse y:' + mousey, 4, 220);		
 		devcanvasContenxt.fillText('canvas mouse x:' + canvasMousePosX, 4, 230);
-		devcanvasContenxt.fillText('canvas mouse y:' + canvasMousePosY, 4, 240);
-		
-		devcanvasContenxt.fillText('player angle:' + player.angle, 4, 260);
-		
+		devcanvasContenxt.fillText('canvas mouse y:' + canvasMousePosY, 4, 240);		
+		devcanvasContenxt.fillText('player angle:' + player.angle, 4, 260);		
 		devcanvasContenxt.beginPath();
 		devcanvasContenxt.moveTo(player.ux, player.uy);
 		devcanvasContenxt.lineTo(canvasMousePosX, canvasMousePosY);
 		devcanvasContenxt.stroke();	
-	}		
+	}
 }
 
 function keyDownHandler(event) {	
