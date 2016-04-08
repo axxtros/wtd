@@ -1,4 +1,6 @@
-/* test  27/03/2016 */
+/* 	init.js
+	start: 27/03/2016
+*/
 
 var PROGRAM_VERISON = 'v.' + 0.1001
 var IMAGE_DIRECTORY = 'img/';
@@ -46,22 +48,25 @@ var mousey = 0;
 var canvasMousePosX = 0;
 var canvasMousePosY = 0;
 
-var player = {	
-	ux : 0,			//unit canvas x coordinate
-	uy : 0,			//unit canvas y coordinate
+var player = {
 	wx : 0,			//world x coordinate
 	wy : 0,			//world y coordinate
-	sx : 0,			//starting map matrix x
-	sy : 0,			//starting map matrix y
+	ux : 0,			//unit canvas x coordinate
+	uy : 0,			//unit canvas y coordinate	
 	mx : 0,			//map matrix x coordinate
 	my : 0,			//map matrix y coordinate
+	sx : 0,			//starting map matrix x
+	sy : 0,			//starting map matrix y
+	mapOffsetx : 0,	//player map offset x axis
+	mapOffsety : 0,	//player map offset y axis
 	direction : 0,	//1-up, 2-down, 3-left, 4-right
+	speed : 0,		//unit speed
 	angle : 0,		//sprite view angle
 	state : 0,		//1-move, 2-stop	
-	darea : 0,		//draw area	
+	darea : 0,		//draw area
 	marea : 0,		//map area
 	carea : 0,		//collision area
-	cbrdr : 0		//collision border
+	cbrdr : 0		//calculated collision border
 };
 
 function init() {
@@ -164,7 +169,7 @@ function setFullScreenCanvas(canvasElement) {
 	}            
 }
 
-function inigameMap(map) {	
+function initGameMap(map) {	
 	var worldX = 0;
 	var worldY = 0;
 	var mapOffsetX = 0;
@@ -176,8 +181,8 @@ function inigameMap(map) {
 			if(map[i][j] == 2) {																
 				var unitCanvasX = 0;
 				var unitCanvasY = 0;
-				var startingX = j;
-				var startingY = i;
+				var mapMatrixX = j;
+				var mapMatrixY = i;
 				
 				worldX = (j * MAP_ELEMENT_SIZE) + (MAP_ELEMENT_SIZE / 2);
 				worldY = (i * MAP_ELEMENT_SIZE) + (MAP_ELEMENT_SIZE / 2);
@@ -203,7 +208,7 @@ function inigameMap(map) {
 					mapOffsetY = (bottomScrollBorder - topScrollBorder);
 				}
 				
-				initPlayer(worldX, worldY, unitCanvasX, unitCanvasY, startingX, startingY, mapOffsetX, mapOffsetY, 2);				
+				initPlayer(worldX, worldY, unitCanvasX, unitCanvasY, mapMatrixX, mapMatrixY, mapOffsetX, mapOffsetY, 2);				
 				unitcanvasContext.drawImage(dummyPlayerImage, player.ux - (MAP_ELEMENT_SIZE / 2), player.uy - (MAP_ELEMENT_SIZE / 2), MAP_ELEMENT_SIZE, MAP_ELEMENT_SIZE);
 				drawMap(map, player.mapOffsetx, player.mapOffsety);									
 				map[i][j] = 0;
@@ -228,11 +233,11 @@ function initPlayer(worldX, worldY, unitCanvasX, unitCanvasY, matrixX, matrixY, 
 	player.my = matrixY;
 	player.sx = matrixX;
 	player.sy = matrixY;
-	player.angle = 0;
 	player.mapOffsetx = mapOffsetX;
-	player.mapOffsety = mapOffsetY;
-	player.speed = UNIT_DEFAULT_SPEED;
+	player.mapOffsety = mapOffsetY;	
 	player.direction = startDirection;
+	player.speed = UNIT_DEFAULT_SPEED;
+	player.angle = 0;	
 	player.state = 2;
 	player.darea = 64;
 	player.marea = 40;
@@ -251,7 +256,7 @@ function gameLoop() {
     delta = now - then;
 		
 	if (delta > interval) {		
-		movePlayer(player, gameMap);		
+		animatePlayer(player, gameMap);		
 		then = now - (delta % interval);
 	}	
 }
@@ -340,7 +345,7 @@ function radToDeg(angle) {
 window.onload = function() {
 	init();	
 	//initTileImages();
-	inigameMap(gameMap);	
+	initGameMap(gameMap);	
 	then =  Date.now();
 	document.addEventListener("keydown", keyDownHandler, true);	
 	if(MOUSE_ENABLED) {

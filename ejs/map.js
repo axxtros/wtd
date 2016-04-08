@@ -1,5 +1,10 @@
 /* map.js */
 
+/* initialization map tile images */
+dummyTileImage = new Image;
+dummyTileImage.onload = function(){  };
+dummyTileImage.src = IMAGE_DIRECTORY + "map_tile_40x40_1.png";
+
 //minimum sized map matrix: 19x24
 var tesgameMap0 = new Array(
 		[2,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],
@@ -85,13 +90,3 @@ var topScrollBorder = (GAME_DIV_HEIGHT / 2);
 var leftScrollBorder = (GAME_DIV_WIDTH / 2);
 var rightScrollBorder = (gameMap[0].length * MAP_ELEMENT_SIZE) - (GAME_DIV_WIDTH / 2);
 var bottomScrollBorder = (gameMap.length * MAP_ELEMENT_SIZE) - (GAME_DIV_HEIGHT / 2);
-
-/* initialization map tile images */
-dummyTileImage = new Image;
-dummyTileImage.onload = function(){  };
-dummyTileImage.src = IMAGE_DIRECTORY + "map_tile_40x40_1.png";
-
-dummyPlayerImage = new Image;
-dummyPlayerImage.onload = function(){  };
-dummyPlayerImage.src = IMAGE_DIRECTORY + "player_tile_40x40_1.png";
-//dummyPlayerImage.src = IMAGE_DIRECTORY + "player_round_tile_40x40.png";

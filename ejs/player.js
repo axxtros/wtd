@@ -1,39 +1,28 @@
 /* player.js */
 
-function movePlayer(player, map) {		
+dummyPlayerImage = new Image;
+dummyPlayerImage.onload = function(){  };
+dummyPlayerImage.src = IMAGE_DIRECTORY + "player_tile_40x40_1.png";
 
-	if(player.state === 3) {			//mouse control
-		//var wmx = player.mapOffsetx + canvasMousePosX;
-		//var wmy = player.mapOffsety + canvasMousePosY;
-	
-		var distanceX = player.ux - canvasMousePosX;
-		var distanceY = player.uy - canvasMousePosY;		
-		
-		if(distanceX !== 0 && distanceY !== 0) {			
-			player.ux -= Math.round( ((player.ux - canvasMousePosX) / player.speed) );  
-			player.uy -= Math.round( ((player.uy - canvasMousePosY) / player.speed) );  
-		}
-		drawPlayer(player);
-		drawMap(map, player.mapOffsetx, player.mapOffsety);
-	}	
+function animatePlayer(player, map) {		
 
-	if(player.state === 1) {				
+	if(player.state === 1) {			//keyboard control
 				
 		if(player.direction === 1) {	//up			
 			player.wy -= player.speed;
-			player.my = Math.floor(player.wy / MAP_ELEMENT_SIZE);
+			player.my = mat(player.wy);
 		}
 		if(player.direction === 2) {	//down					
 			player.wy += player.speed;									
-			player.my = Math.floor(player.wy / MAP_ELEMENT_SIZE);
+			player.my = mat(player.wy);
 		}		
 		if(player.direction === 3) {	//left						
 			player.wx -= player.speed;			
-			player.mx = Math.floor(player.wx / MAP_ELEMENT_SIZE);
+			player.mx = mat(player.wx);
 		}
 		if(player.direction === 4) {	//right						
 			player.wx += player.speed;			
-			player.mx = Math.floor(player.wx / MAP_ELEMENT_SIZE);
+			player.mx = mat(player.wx);
 		}		
 				
 		collisionDetectionPlayer(player, map);
@@ -54,6 +43,22 @@ function movePlayer(player, map) {
 		drawPlayer(player);
 		drawMap(map, player.mapOffsetx, player.mapOffsety);
 	}	
+	
+	if(player.state === 3) {			//mouse control
+		//var wmx = player.mapOffsetx + canvasMousePosX;
+		//var wmy = player.mapOffsety + canvasMousePosY;
+	
+		var distanceX = player.ux - canvasMousePosX;
+		var distanceY = player.uy - canvasMousePosY;		
+		
+		if(distanceX !== 0 && distanceY !== 0) {			
+			player.ux -= Math.round( ((player.ux - canvasMousePosX) / player.speed) );  
+			player.uy -= Math.round( ((player.uy - canvasMousePosY) / player.speed) );  
+		}
+		drawPlayer(player);
+		drawMap(map, player.mapOffsetx, player.mapOffsety);
+	}
+	
 	//player.state = 2;
 }
 
@@ -76,7 +81,7 @@ function collisionDetectionPlayer(player, map) {
 				isCollision = true;
 			}
 		}		
-		player.my = Math.floor(player.wy / MAP_ELEMENT_SIZE);
+		player.my = mat(player.wy);
 	}
 	if(player.direction === 2) {	//down		
 		if(player.my === (map.length - 1)) {		
@@ -95,7 +100,7 @@ function collisionDetectionPlayer(player, map) {
 				isCollision = true;
 			}
 		}		
-		player.my = Math.floor(player.wy / MAP_ELEMENT_SIZE);
+		player.my = mat(player.wy);
 	}
 	if(player.direction === 3) {	//left
 		if(player.mx === 0) {
@@ -114,7 +119,7 @@ function collisionDetectionPlayer(player, map) {
 				isCollision = true;
 			}
 		}
-		player.mx = Math.floor(player.wx / MAP_ELEMENT_SIZE);
+		player.mx = mat(player.wx);
 	}
 	if(player.direction === 4) {	//right
 		if(player.mx === (map[0].length - 1)) {
@@ -133,15 +138,11 @@ function collisionDetectionPlayer(player, map) {
 				isCollision = true;
 			}			
 		}
-		player.mx = Math.floor(player.wx / MAP_ELEMENT_SIZE);
+		player.mx = mat(player.wx);
 	}
 	if(isCollision) {
 		player.state = 2;
 	}
-}
-
-function mat(worldCoord) {
-	return  Math.floor(worldCoord / MAP_ELEMENT_SIZE);
 }
 
 function scrollX(player) {
