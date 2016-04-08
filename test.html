@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+  <head>  
+	 <meta charset="UTF-8">
+	 <title>HTML5</title>
+	<style>
+		body {
+			width: 1000px; 
+			margin: 0px auto; 						
+			background: white;			
+		}
+	</style>
+  </head> 
+  <body>
+	
+	<div id="gamediv" style="display: block; margin-top: 10px; margin-left: auto; margin-right: auto; width: 800px;">
+				
+		<canvas id="mapcanvas" width="800" height="400" style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
+		<canvas id="unitcanvas" style="position: absolute; z-index: 2;"></canvas>
+		<canvas id="devcanvas" style="position: absolute; z-index: 100;"></canvas>
+		<canvas id="mousecanvas" style="position: absolute; z-index: 200;"></canvas>
+	</div>
+	
+	<input id="version" type="text" style="float: right; border: none;" />	
+	
+	<script src="ejs/jquery-2.2.0.min.js"></script>	
+	<script src="ejs/init.js"></script>
+	<script src="ejs/map.js"></script>
+	<script src="ejs/player.js"></script>
+  </body>
+</html>

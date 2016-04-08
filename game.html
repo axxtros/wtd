@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+  <head>  
+	 <meta charset="UTF-8"> 
+	<style>
+		body {
+			width: 1000px; 
+			margin: 0px auto; 						
+			background: white;
+			border: 1px solid grey;			
+		}
+	</style>
+  </head> 
+  <body>
+	
+	<div id="gamediv" style="display: block; margin-top: 4px; margin-left: auto; margin-right: auto; width: 800px;">
+				
+		<canvas id="mapcanvas" width="800" height="400" style="position: absolute; left: 0; top: 0; z-index: 0;">
+			Your browser is not supported the HTML5 canvas.
+		</canvas>	
+		<canvas id="unitcanvas" width="800" height="400" style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
+		<canvas id="missilecanvas" width="800" height="400" style="position: absolute; left: 0; top: 0; z-index: 2;"></canvas>
+		<canvas id="devcanvas" style="position: absolute; z-index: 100;"></canvas>
+		
+	</div>
+	
+	<input id="version" type="text" style="float: right; border: none;" />		
+	
+	<!--
+	<audio controls loop id="song" src="songs/song.wav" style="display: none;"></audio>
+	<audio id="soundEfx" src="songs/selected4.wav" style="display: none;"></audio>
+	-->
+	<!--
+	<script type="text/javascript" src="json/archer.json"></script>
+	-->
+	
+	<script src="js/jquery-2.2.0.min.js"></script>
+	<script src="js/init.js"></script>	
+	<script src="js/loader.js"></script>
+	<script src="js/map.js"></script>		
+	<script src="js/game.js"></script>
+	<script src="js/animate_and_draw.js"></script>	
+  </body>
+</html>
+
+<!-- 
+	íjfejlesztés (speed, dmg, red, green), nyílfejlesztés, unit +xp, +hp, gyorsaság, hang, zene, effektek, unit fire rating, fény/árnyék
+-->

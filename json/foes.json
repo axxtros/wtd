@@ -1,0 +1,17 @@
+[
+		{
+			"name": "enemy1",
+			"hp": 101,
+			"tiles" : "img/enemy_tile1.png "
+		},
+		{
+			"name": "enemy2",
+			"hp": 102,
+			"tiles" : "img/archer_tile3.png "
+		},
+		{
+			"name": "enemy3",
+			"hp": 103,
+			"tiles" : "img/archer_tile3.png "
+		}	
+]

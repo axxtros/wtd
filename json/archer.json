@@ -1,0 +1,22 @@
+{
+	"name": "Player",
+	"hp": 100,
+	"speed" : 5,
+	"x" : 40,
+	"y" : 40,
+	"direction" : 0,
+	"state" : 0,
+	"firerate" : 10,
+	"fireratecounter" : 0,
+	"movecurrentframe" : 0,
+	"firecurrentframe" : 5,
+	"deathcurrentframe" : 0,
+	"maxmoveframe" : 4,
+	"maxfireframe" : 7,
+	"maxdeathframe" : 5,
+	"collisionarea" : 32,
+	"imagetilesrc" : "archer_tile_64x64.png",
+	"drawtilesize" : 64,
+	"collisiontilesize" : 32,
+	"difftileborder" : 0	
+}

@@ -1,0 +1,58 @@
+//sound effects
+//http://www.thanatosrealms.com/war2/alliance-sounds
+//http://www.onlywebpro.com/2012/03/10/html5-game-development-adding-sound-effects/
+//https://onedrive.live.com/?authkey=!&id=113A53CC9A91C960!419&cid=113A53CC9A91C960
+
+//warcraft graphics tutorial
+//http://off.net/seed/Seed/Docs/integer.html
+
+//example canvas scrollable
+//https://www.youtube.com/watch?v=UFK7cF3COkA
+//https://developer.mozilla.org/en-US/docs/Games/Techniques/Tilemaps/Square_tilemaps_implementation:_Static_maps
+//https://www.youtube.com/watch?v=nqLSx97ccCQ
+//https://www.youtube.com/watch?v=dlmTFl1U1oE
+//http://www.creativebloq.com/html5/build-tile-based-html5-game-31410992
+//mátrixos
+//https://www.youtube.com/watch?v=W3dghOk5qeU
+
+//game and canvas tutorials
+//https://developer.apple.com/library/iad/documentation/AudioVideo/Conceptual/HTML-canvas-guide/AddingMouseandTouchControlstoCanvas/AddingMouseandTouchControlstoCanvas.html
+
+//demo scroll map
+//http://jsfiddle.net/gfcarv/QKgHs/
+
+//tutorials
+//http://blog.sklambert.com/create-a-canvas-tileset-background/
+
+//examples (with codes)
+//http://anthonydel.com/html5-canvas-tiled-map-rendering/
+//http://curran.github.io/HTML5Examples/
+
+//rpg fantasy game web page example
+//http://www.talesofmagic.de/
+//https://www.youtube.com/watch?v=pkCgLGT91MA
+
+//sokféle téma a játékfejlesztéshez
+//http://gamedevelopment.tutsplus.com/
+//http://www.webtech360.com/detail/html5-canvas-game-tank-simple-part-1-3565.html
+
+//tankos példa szögre és mozgásra
+//http://code.tutsplus.com/tutorials/quick-tip-trigonometry-for-flash-game-developers--active-4458
+
+//perlin noise
+//https://gillesleblanc.wordpress.com/2012/10/16/creating-a-random-2d-game-world-map/
+
+//dungeon map generator
+//http://pcg.wikidot.com/pcg-algorithm:dungeon-generation
+
+//dungeon generator example
+//http://www.gozzys.com/dungeon-maps
+
+//dynamic animation tutorials
+//http://chimera.labs.oreilly.com/books/1234000001654/ch05.html#moving_between_two_points_colon_the_dist
+
+//dungeon generator
+//http://journal.stuffwithstuff.com/2014/12/21/rooms-and-mazes/
+
+//isometric map generator example
+//http://gamedev.stackexchange.com/questions/47388/best-technique-for-drawing-isometric-tiles

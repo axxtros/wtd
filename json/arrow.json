@@ -1,0 +1,26 @@
+{
+	"name" : "Simple arrow",
+	"type": "green",
+	"hit": "20",
+	"speed" : 27,
+	"status" : 0,
+	"x" : 0,
+	"y" : 0,
+	"direction" : 0,
+	"imagetilesrc" : "missiles_tile.png",
+	
+	"updrawtilex" : 0,
+	"updrawtiley" : 0,	
+	
+	"downdrawtilex" : 5,
+	"downdrawtiley" : 0,	
+	
+	"rightdrawtilex" : 10,
+	"rightdrawtiley" : 0,	
+	
+	"leftdrawtilex" : 10,
+	"leftdrawtiley" : 5,	
+	
+	"drawtilelongersize" : 32,
+	"drawtilesmallersize" : 5
+}

@@ -1,0 +1,16 @@
+07/04/2016
+
+Kliens oldal
+- Lövedékek megvalósítása
+- Játékos támadás/lövedék találat
+- AI (mozgás, járörözés egy előre megadott útvonalon, támadás, esetleg menekülés)
+- AI collision és lövedék találat
+- Játékos és ellenség sprite animációk (mozgás, támadás/lövés, halál, elhunyt)
+- Hangok (zene és effektek)
+
+Szerver oldal
+- Inicializálása
+- Térkép átadás
+- Klinesek közötti adat szinkornizálás (pl: AI viselkedések, chat, játékosok adatai, + ami még kell)
+- Klinesek közötti grafikai szinkronizálás
+- Klinesek közötti hang szinkronizálás
