@@ -256,8 +256,8 @@ function gameLoop() {
     delta = now - then;
 		
 	if (delta > interval) {		
-		animateMissiles(player.mapOffsetx, player.mapOffsety, gameMap);
 		animatePlayer(player, gameMap);
+		animateMissiles(player, gameMap);		
 		then = now - (delta % interval);
 	}	
 }

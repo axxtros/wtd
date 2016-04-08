@@ -25,7 +25,7 @@ function animatePlayer(player, map) {
 			player.mx = mat(player.wx);
 		}		
 				
-		collisionDetectionPlayer(player, map);
+		//collisionDetectionPlayer(player, map);
 		
 		if(player.direction === 1 && player.state === 1) {	//up			
 			scrollY(player);			

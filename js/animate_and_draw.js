@@ -116,7 +116,7 @@ function drawMissile(missile) {
 			return;
 		}
 		if(missile.direction === 1) {		//down
-			missileCanvasContext.drawImage(missile.image, missile.downdrawtilex, missile.downdrawtiley, missile.drawtilesmallersize, missile.drawtilelongersize, missile.xS, missile.y, missile.drawtilesmallersize, missile.drawtilelongersize);
+			missileCanvasContext.drawImage(missile.image, missile.downdrawtilex, missile.downdrawtiley, missile.drawtilesmallersize, missile.drawtilelongersize, missile.x, missile.y, missile.drawtilesmallersize, missile.drawtilelongersize);
 			return;
 		}
 		if(missile.direction === 2) {		//right
