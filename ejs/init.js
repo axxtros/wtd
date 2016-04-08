@@ -208,7 +208,7 @@ function initGameMap(map) {
 					mapOffsetY = (bottomScrollBorder - topScrollBorder);
 				}
 				
-				initPlayer(worldX, worldY, unitCanvasX, unitCanvasY, mapMatrixX, mapMatrixY, mapOffsetX, mapOffsetY, 2);				
+				initPlayer(worldX, worldY, unitCanvasX, unitCanvasY, mapMatrixX, mapMatrixY, mapOffsetX, mapOffsetY, 3);				
 				unitcanvasContext.drawImage(dummyPlayerImage, player.ux - (MAP_ELEMENT_SIZE / 2), player.uy - (MAP_ELEMENT_SIZE / 2), MAP_ELEMENT_SIZE, MAP_ELEMENT_SIZE);
 				drawMap(map, player.mapOffsetx, player.mapOffsety);									
 				map[i][j] = 0;
@@ -256,7 +256,8 @@ function gameLoop() {
     delta = now - then;
 		
 	if (delta > interval) {		
-		animatePlayer(player, gameMap);		
+		animateMissiles(player.mapOffsetx, player.mapOffsety, gameMap);
+		animatePlayer(player, gameMap);
 		then = now - (delta % interval);
 	}	
 }
@@ -321,6 +322,7 @@ function keyDownHandler(event) {
 	}
 	if (event.keyCode == 32) {	//space - fire
 		player.state = 2;
+		shotNewMissile(player, NORMAL_ARROW);
 	}
 }
 

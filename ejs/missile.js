@@ -30,10 +30,15 @@ var missle = {
 
 var activeMissilesList = new Array();
 
-function createNewMissile(startx, starty, unit, type) {
+function shotNewMissile(unit, type) {
+	var newMissile = createNewMissile(unit, type);
+	addNewMissileToActiveMisslesList(newMissile);
+}
+
+function createNewMissile(unit, type) {
 	missile = new Object();
-	missile.wx = startx;
-	missile.wy = starty;
+	missile.wx = unit.wx;
+	missile.wy = unit.wy;
 	missile.ux = unit.ux;
 	missile.uy = unit.uy;
 	missile.mx = unit.mx;
@@ -52,12 +57,23 @@ function addNewMissileToActiveMisslesList(missle) {
 	activeMissilesList.push(missle);
 }
 
+function animateMissiles(playerMapOffsetX, playerMapOffsetY, map) {
+	for(i = 0; i < activeMissilesList.length; i++) {
+		if(activeMissilesList[i] != null && activeMissilesList[i].state === 3) {	//azokat a missile-eket töröljük az aktív listából, amelyek már megsemmisültek
+			removeMissileFromActiveMissilesList(i);
+			continue;
+		}
+		if(activeMissilesList[i] != null && activeMissilesList[i].state === 1) {
+			animateMissile(playerMapOffsetX, playerMapOffsetY, activeMissilesList[i], map);			
+		}				
+	}	
+}
+
 function removeMissileFromActiveMissilesList(index) {
-	//clearMissile(activeMissilesList[index]);
 	activeMissilesList.splice(index, 1);		
 }
 
-function animateMissile(missile, map) {
+function animateMissile(playerMapOffsetX, playerMapOffsetY, missile, map) {
 	
 	if(missile.state === 1) {		//move
 		if(missile.direction === 1) {	//up
@@ -75,13 +91,13 @@ function animateMissile(missile, map) {
 		if(missile.direction === 4) {	//right
 			missile.wx += missile.speed;			
 			missile.mx = mat(missle.wx);
-		}
-		
+		}		
 		collisionDetectionMissile(missile, map);
-		
+		drawMissile(playerMapOffsetX, playerMapOffsetY, missile);
 	}
 	if(missile.state === 2) {		//strike/destroy
-	
+		
+		drawMissile(playerMapOffsetX, playerMapOffsetY, missile);
 	}
 	if(missile.state === 3) {		//delete
 	
@@ -90,4 +106,12 @@ function animateMissile(missile, map) {
 
 function collisionDetectionMissile(missile, map) {
 	
+}
+
+function drawMissile(playerMapOffsetX, playerMapOffsetY, missile) {
+	missilecanvasContext.clearRect(0, 0, unitcanvas.width, unitCanvas.height);		//clear missile canvas
+	if(missile.state === 1 || missile.state === 2) {
+		missilecanvasContext.drawImage(dummyMissileImage, ((playerMapOffsetX + missile.wx) - (MAP_ELEMENT_SIZE / 2)), ((playerMapOffsetY + missile.wy) - (MAP_ELEMENT_SIZE / 2)), MAP_ELEMENT_SIZE, MAP_ELEMENT_SIZE);
+		return;
+	}
 }

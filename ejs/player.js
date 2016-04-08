@@ -210,15 +210,11 @@ function scrollY(player) {
 }
 
 function drawPlayer(player) {	
-	clearPlayer();
+	unitcanvasContext.clearRect(0, 0, unitcanvas.width, unitCanvas.height);		//clear unit canvas
 	if(player.state === 1 || player.state === 2 || player.state === 3) {		//move and stop animation ???
 		unitcanvasContext.drawImage(dummyPlayerImage, player.ux - (MAP_ELEMENT_SIZE / 2), player.uy - (MAP_ELEMENT_SIZE / 2), MAP_ELEMENT_SIZE, MAP_ELEMENT_SIZE);
 		return;
 	}
-}
-
-function clearPlayer() {
-	unitcanvasContext.clearRect(0, 0, unitcanvas.width, unitCanvas.height);	
 }
 
 function drawMap(map, offsetX, offsetY) {
