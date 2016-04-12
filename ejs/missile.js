@@ -13,6 +13,7 @@ var NORMAL_ARROW = {
 };
 
 var missle = {			
+	id : 0,
 	wx : 0,			//world x coordinate
 	wy : 0,			//world y coordinate
 	ux : 0,			//missile canvas x coordinate
@@ -37,10 +38,11 @@ function shotNewMissile(unit, type) {
 
 function createNewMissile(unit, type) {
 	missile = new Object();
+	missile.id = Math.floor(Math.random() * 10) + 1;
 	missile.wx = unit.wx;
 	missile.wy = unit.wy;
-	missile.ux = unit.ux + unit.mapOffsetx;	//ez kell az eltolás miatt
-	missile.uy = unit.uy + unit.mapOffsety; //ez kell az eltolás miatt
+	missile.ux = (unit.ux + unit.mapOffsetx);	//ez kell az eltolás miatt
+	missile.uy = (unit.uy + unit.mapOffsety); 	//ez kell az eltolás miatt
 	missile.mx = unit.mx;
 	missile.my = unit.my;
 	missile.mapOffsetx = unit.mapOffsetx;
@@ -58,10 +60,11 @@ function addNewMissileToActiveMisslesList(missle) {
 }
 
 function animateMissiles(player, map) {
-	for(i = 0; i < activeMissilesList.length; i++) {
+	missilecanvasContext.clearRect(0, 0, unitcanvas.width, unitCanvas.height);		//itt kell törölni, mert utána jöhet az összes kirajzolása
+	for(var i = 0; i < activeMissilesList.length; i++) {
 		if(activeMissilesList[i] != null && activeMissilesList[i].state === 3) {	//azokat a missile-eket töröljük az aktív listából, amelyek már megsemmisültek
-			removeMissileFromActiveMissilesList(i);
-			continue;
+			//removeMissileFromActiveMissilesList(i);
+			//continue;
 		}
 		if(activeMissilesList[i] != null && activeMissilesList[i].state === 1) {
 			animateMissile(player, activeMissilesList[i], map);			
@@ -74,6 +77,8 @@ function removeMissileFromActiveMissilesList(index) {
 }
 
 function animateMissile(player, missile, map) {
+	
+	console.log("@axx missile id: " + missile.id);
 	
 	if(missile.state === 1) {		//move
 		if(missile.direction === 1) {	//up
@@ -123,8 +128,7 @@ function collisionDetectionMissile(missile, map) {
 function drawMissile(player, missile) {		
 	var drawmx = (missile.ux - missile.mapOffsetx);
 	var drawmy = (missile.uy - missile.mapOffsety);
-	
-	missilecanvasContext.clearRect(0, 0, unitcanvas.width, unitCanvas.height);
+		
 	if(missile.state === 1 || missile.state === 2) {
 		missilecanvasContext.drawImage(dummyMissileImage, drawmx, drawmy, missile.ch, missile.cw);
 	}

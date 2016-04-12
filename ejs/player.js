@@ -44,10 +44,7 @@ function animatePlayer(player, map) {
 		drawMap(map, player.mapOffsetx, player.mapOffsety);
 	}	
 	
-	if(player.state === 3) {			//mouse control
-		//var wmx = player.mapOffsetx + canvasMousePosX;
-		//var wmy = player.mapOffsety + canvasMousePosY;
-	
+	if(player.state === 3) {			//mouse control (not enabled)
 		var distanceX = player.ux - canvasMousePosX;
 		var distanceY = player.uy - canvasMousePosY;		
 		
@@ -57,8 +54,7 @@ function animatePlayer(player, map) {
 		}
 		drawPlayer(player);
 		drawMap(map, player.mapOffsetx, player.mapOffsety);
-	}
-	
+	}	
 	//player.state = 2;
 }
 
