@@ -44,7 +44,7 @@ function animatePlayer(player, map) {
 		drawMap(map, player.mapOffsetx, player.mapOffsety);
 	}	
 	
-	if(player.state === 3) {			//mouse control (not enabled)
+	if(player.state === 3) {			//mouse control (disabled)
 		var distanceX = player.ux - canvasMousePosX;
 		var distanceY = player.uy - canvasMousePosY;		
 		

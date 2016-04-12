@@ -11,6 +11,6 @@ Kliens oldal
 Szerver oldal
 - Inicializálása
 - Térkép átadás
-- Klinesek közötti adat szinkornizálás (pl: AI viselkedések, chat, játékosok adatai, + ami még kell)
+- Klinesek közötti adat szinkornizálás (pl: lövedékek koordinálása, AI mozgások/viselkedések, chat, játékosok adatai, + ami még kell)
 - Klinesek közötti grafikai szinkronizálás
 - Klinesek közötti hang szinkronizálás
