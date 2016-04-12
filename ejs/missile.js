@@ -52,7 +52,7 @@ function createNewMissile(unit, type) {
 	}
 	
 	missile.wx = unit.wx;
-	missile.wy = unit.wy;	
+	missile.wy = unit.wy;
 	missile.ux = (unit.ux + unit.mapOffsetx);	//ez kell az eltolás miatt
 	missile.uy = (unit.uy + unit.mapOffsety); 	//ez kell az eltolás miatt
 	
