@@ -39,8 +39,8 @@ function createNewMissile(unit, type) {
 	missile = new Object();
 	missile.wx = unit.wx;
 	missile.wy = unit.wy;
-	missile.ux = unit.ux;
-	missile.uy = unit.uy;
+	missile.ux = unit.ux + unit.mapOffsetx;	//ez kell az eltolás miatt
+	missile.uy = unit.uy + unit.mapOffsety; //ez kell az eltolás miatt
 	missile.mx = unit.mx;
 	missile.my = unit.my;
 	missile.mapOffsetx = unit.mapOffsetx;
@@ -79,21 +79,29 @@ function animateMissile(player, missile, map) {
 		if(missile.direction === 1) {	//up
 			missile.wy -= missile.speed;			
 			missile.uy -= missile.speed;
+			missile.mapOffsetx = player.mapOffsetx;
+			missile.mapOffsety = player.mapOffsety;
 			missile.my = mat(missle.wy);
 		}
 		if(missile.direction === 2) {	//down
 			missile.wy += missile.speed;
 			missile.uy += missile.speed;			
+			missile.mapOffsetx = player.mapOffsetx;
+			missile.mapOffsety = player.mapOffsety;
 			missile.my = mat(missle.wy);
 		}
 		if(missile.direction === 3) {	//left
 			missile.wx -= missile.speed;			
 			missile.ux -= missile.speed;
+			missile.mapOffsetx = player.mapOffsetx;
+			missile.mapOffsety = player.mapOffsety;
 			missile.mx = mat(missle.wx);
 		}
 		if(missile.direction === 4) {	//right
 			missile.wx += missile.speed;			
 			missile.ux += missile.speed;
+			missile.mapOffsetx = player.mapOffsetx;
+			missile.mapOffsety = player.mapOffsety;
 			missile.mx = mat(missle.wx);
 		}		
 		collisionDetectionMissile(missile, map);
@@ -112,19 +120,12 @@ function collisionDetectionMissile(missile, map) {
 	
 }
 
-function drawMissile(player, missile) {	
-	var drawmx = missile.ux + (player.mapOffsetx * (-1));
-	var drawmy = 0;
-	if(player.mapOffsetx === 0) {
-		drawmy = missile.uy + (player.mapOffsety * (-1));
-	} else {
-		drawmy = (missile.uy + (player.mapOffsety * (-1))) + player.mapOffsety;
-	}
-	
+function drawMissile(player, missile) {		
+	var drawmx = (missile.ux - missile.mapOffsetx);
+	var drawmy = (missile.uy - missile.mapOffsety);
 	
 	missilecanvasContext.clearRect(0, 0, unitcanvas.width, unitCanvas.height);
 	if(missile.state === 1 || missile.state === 2) {
 		missilecanvasContext.drawImage(dummyMissileImage, drawmx, drawmy, missile.ch, missile.cw);
-		return;
 	}
 }
