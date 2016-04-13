@@ -50,7 +50,6 @@ function createNewMissile(unit, type) {
 	missile.speed = type.speed;	
 	missile.cw = type.cw;
 	missile.ch = type.ch;	
-	console.log("@axx missile wx: " + missile.wx + " wy: " + missile.wy);
 	return missile;
 }
 
@@ -90,8 +89,8 @@ function animateMissile(player, missile, map) {
 			missile.wx += missile.speed;						
 			missile.mx = mat(missile.wx);
 		}		
-				
-		drawMissile(player, missile);
+		
+		drawMissile(player, missile);		
 		
 		if(missile.direction === 1 && missile.state === 1) {	//up
 			missile.uy -= missile.speed;
@@ -112,7 +111,7 @@ function animateMissile(player, missile, map) {
 			missile.ux += missile.speed;
 			missile.mapOffsetx = player.mapOffsetx;
 			missile.mapOffsety = player.mapOffsety;
-		}		
+		}				
 		collisionDetectionMissile(missile, map);
 	}
 	if(missile.state === 2) {		//strike/destroy
@@ -127,14 +126,12 @@ function animateMissile(player, missile, map) {
 }
 
 function collisionDetectionMissile(missile, map) {
-	var isCollision = false;
+	var isCollision = false;	
 	if(missile.direction === 1) {	//up
 		if(missile.my === 0) {
 			if(missile.wy <= 0) {
 				isCollision = true;
 			}
-		} else {
-			
 		}
 	}
 	if(missile.direction === 2) {	//down
@@ -142,8 +139,6 @@ function collisionDetectionMissile(missile, map) {
 			if(missile.wy >= (map.length * MAP_ELEMENT_SIZE)) {
 				isCollision = true;
 			}
-		} else {
-			
 		}
 	}
 	if(missile.direction === 3) {	//left		
@@ -151,8 +146,6 @@ function collisionDetectionMissile(missile, map) {
 			if(missile.wx <= 0) {
 				isCollision = true;
 			}
-		} else {
-			
 		}
 	}
 	if(missile.direction === 4) {	//right		
@@ -160,10 +153,13 @@ function collisionDetectionMissile(missile, map) {
 			if(missile.wx >= (map[0].length * MAP_ELEMENT_SIZE)) {				
 				isCollision = true;
 			}
-		} else {
-			
 		}
 	}
+	
+	if(!isCollision && map[missile.my][missile.mx] !== 0) {	//walls, units, etc. collisions
+		isCollision = true;
+	}
+	
 	if(isCollision) {
 		missile.state = 2;
 	}
@@ -176,7 +172,6 @@ function removeMissileFromActiveMissilesList(index) {
 function drawMissile(player, missile) {		
 	var drawmx = (missile.ux - missile.mapOffsetx);
 	var drawmy = (missile.uy - missile.mapOffsety);
-		
 	if(missile.state === 1 || missile.state === 2) {
 		missilecanvasContext.drawImage(dummyMissileImage, drawmx, drawmy, missile.ch, missile.cw);
 	}
