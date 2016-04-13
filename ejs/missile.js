@@ -2,13 +2,13 @@
 
 dummyMissileImage = new Image;
 dummyMissileImage.onload = function(){  };
-dummyMissileImage.src = IMAGE_DIRECTORY + "missile_tile_40x5.png";
+dummyMissileImage.src = IMAGE_DIRECTORY + "missile_tile_20x20_1.png";
 
 var NORMAL_ARROW = {
 	name : "Normal arrow",
 	hit : 10,
 	speed : 5,
-	cw : 4,
+	cw : 20,
 	ch : 20
 };
 
@@ -37,25 +37,10 @@ function shotNewMissile(unit, type) {
 
 function createNewMissile(unit, type) {
 	missile = new Object();	
-	
-	if(unit.direction === 1) {	//up
-	
-	}
-	if(unit.direction === 2) {	//down
-	
-	}
-	if(unit.direction === 3) {	//left
-		
-	}
-	if(unit.direction === 4) {	//right
-	
-	}
-	
 	missile.wx = unit.wx;
 	missile.wy = unit.wy;
-	missile.ux = (unit.ux + unit.mapOffsetx);	//ez kell az eltolás miatt
-	missile.uy = (unit.uy + unit.mapOffsety); 	//ez kell az eltolás miatt
-	
+	missile.ux = (unit.ux + unit.mapOffsetx) - (MAP_ELEMENT_SIZE / 4);
+	missile.uy = (unit.uy + unit.mapOffsety) - (MAP_ELEMENT_SIZE / 4);	
 	missile.mx = mat(missile.wx);
 	missile.my = mat(missile.wy);
 	missile.mapOffsetx = unit.mapOffsetx;
@@ -69,18 +54,20 @@ function createNewMissile(unit, type) {
 	return missile;
 }
 
-function addNewMissileToActiveMisslesList(missle) {
-	activeMissilesList.push(missle);
+function addNewMissileToActiveMisslesList(missile) {
+	activeMissilesList.push(missile);
 }
 
 function animateMissiles(player, map) {
-	missilecanvasContext.clearRect(0, 0, unitcanvas.width, unitCanvas.height);		//itt kell törölni, mert utána jöhet az összes kirajzolása
-	for(var i = 0; i < activeMissilesList.length; i++) {		
-		if(activeMissilesList[i] != null && activeMissilesList[i].state === 1) {	//lövedékek mozgatása
-			animateMissile(player, activeMissilesList[i], map);			
-		}				
-		if(activeMissilesList[i] != null && activeMissilesList[i].state === 3) {	//azokat a missile-eket töröljük az aktív listából, amelyek már megsemmisültek
-			removeMissileFromActiveMissilesList(i);			
+	if(activeMissilesList.length > 0) {
+		missilecanvasContext.clearRect(0, 0, unitcanvas.width, unitCanvas.height);		//itt kell törölni, mert utána jöhet az összes kirajzolása
+		for(var i = 0; i < activeMissilesList.length; i++) {		
+			if(activeMissilesList[i] != null && (activeMissilesList[i].state === 1 || activeMissilesList[i].state === 2)) {	//lövedékek mozgatása
+				animateMissile(player, activeMissilesList[i], map);			
+			}				
+			if(activeMissilesList[i] != null && activeMissilesList[i].state === 3) {	//azokat a missile-eket töröljük az aktív listából, amelyek már megsemmisültek
+				removeMissileFromActiveMissilesList(i);			
+			}
 		}
 	}	
 }
@@ -88,38 +75,50 @@ function animateMissiles(player, map) {
 function animateMissile(player, missile, map) {	
 	if(missile.state === 1) {		//move
 		if(missile.direction === 1) {	//up
-			missile.wy -= missile.speed;			
-			missile.uy -= missile.speed;
-			missile.mapOffsetx = player.mapOffsetx;
-			missile.mapOffsety = player.mapOffsety;
-			missile.my = mat(missle.wy);
+			missile.wy -= missile.speed;
+			missile.my = mat(missile.wy);
 		}
 		if(missile.direction === 2) {	//down
 			missile.wy += missile.speed;
+			missile.my = mat(missile.wy);
+		}
+		if(missile.direction === 3) {	//left
+			missile.wx -= missile.speed;						
+			missile.mx = mat(missile.wx);
+		}
+		if(missile.direction === 4) {	//right
+			missile.wx += missile.speed;						
+			missile.mx = mat(missile.wx);
+		}		
+				
+		drawMissile(player, missile);
+		
+		if(missile.direction === 1 && missile.state === 1) {	//up
+			missile.uy -= missile.speed;
+			missile.mapOffsetx = player.mapOffsetx;
+			missile.mapOffsety = player.mapOffsety;
+		}
+		if(missile.direction === 2 && missile.state === 1) {	//down
 			missile.uy += missile.speed;			
 			missile.mapOffsetx = player.mapOffsetx;
 			missile.mapOffsety = player.mapOffsety;
-			missile.my = mat(missle.wy);
 		}
-		if(missile.direction === 3) {	//left
-			missile.wx -= missile.speed;			
+		if(missile.direction === 3 && missile.state === 1) {	//left
 			missile.ux -= missile.speed;
 			missile.mapOffsetx = player.mapOffsetx;
 			missile.mapOffsety = player.mapOffsety;
-			missile.mx = mat(missle.wx);
 		}
-		if(missile.direction === 4) {	//right
-			missile.wx += missile.speed;			
+		if(missile.direction === 4 && missile.state === 1) {	//right
 			missile.ux += missile.speed;
 			missile.mapOffsetx = player.mapOffsetx;
 			missile.mapOffsety = player.mapOffsety;
-			missile.mx = mat(missle.wx);
 		}		
 		collisionDetectionMissile(missile, map);
-		drawMissile(player, missile);
 	}
 	if(missile.state === 2) {		//strike/destroy
-		
+		missile.mapOffsetx = player.mapOffsetx;
+		missile.mapOffsety = player.mapOffsety;
+		//destroy animation on...
 		drawMissile(player, missile);
 	}
 	if(missile.state === 3) {		//delete
@@ -131,21 +130,43 @@ function collisionDetectionMissile(missile, map) {
 	var isCollision = false;
 	if(missile.direction === 1) {	//up
 		if(missile.my === 0) {
-			
+			if(missile.wy <= 0) {
+				isCollision = true;
+			}
 		} else {
-		
+			
 		}
 	}
 	if(missile.direction === 2) {	//down
-	
+		if(missile.my === map.length) {
+			if(missile.wy >= (map.length * MAP_ELEMENT_SIZE)) {
+				isCollision = true;
+			}
+		} else {
+			
+		}
 	}
-	if(missile.direction === 3) {	//left
-	
+	if(missile.direction === 3) {	//left		
+		if(missile.mx === 0) {
+			if(missile.wx <= 0) {
+				isCollision = true;
+			}
+		} else {
+			
+		}
 	}
-	if(missile.direction === 4) {	//right
-	
+	if(missile.direction === 4) {	//right		
+		if(missile.mx === map[0].length) {			
+			if(missile.wx >= (map[0].length * MAP_ELEMENT_SIZE)) {				
+				isCollision = true;
+			}
+		} else {
+			
+		}
 	}
-	return isCollision;
+	if(isCollision) {
+		missile.state = 2;
+	}
 }
 
 function removeMissileFromActiveMissilesList(index) {

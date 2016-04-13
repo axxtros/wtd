@@ -80,7 +80,7 @@ function collisionDetectionPlayer(player, map) {
 		player.my = mat(player.wy);
 	}
 	if(player.direction === 2) {	//down		
-		if(player.my === (map.length - 1)) {		
+		if(player.my === (map.length - 1)) {
 			if(player.wy >= ((map.length * MAP_ELEMENT_SIZE) - (MAP_ELEMENT_SIZE / 2)) ) {
 				player.wy = ((map.length * MAP_ELEMENT_SIZE) - (MAP_ELEMENT_SIZE / 2));
 				player.uy = (GAME_DIV_HEIGHT - (MAP_ELEMENT_SIZE / 2));
