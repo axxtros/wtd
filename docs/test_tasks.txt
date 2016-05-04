@@ -14,3 +14,12 @@ Szerver oldal
 - Klinesek közötti adat szinkornizálás (pl: lövedékek koordinálása, AI mozgások/viselkedések, chat, játékosok adatai, + ami még kell)
 - Klinesek közötti grafikai szinkronizálás
 - Klinesek közötti hang szinkronizálás
+
+15/04/2016
+Fejlesztett program:
+- Izometrikus vagy teljes 3D-s térkép
+- Fejlesztett dungeon generátor
+- Fejlesztett AI
+- Fejlesztett játékrendszer
+- Magas szinvonalú grafika, zene, hangeffektek
+- Teljes regisztráció, felhasználói adatbázis
