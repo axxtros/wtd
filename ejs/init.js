@@ -307,7 +307,7 @@ function keyDownHandler(event) {
 	}
 	if (event.keyCode == 40) {	//down	
 		player.direction = 2;
-		player.state = 1;		
+		player.state = 1;
 	}
 	if (event.keyCode == 37) {	//left		
 		player.direction = 3;
