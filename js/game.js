@@ -50,7 +50,7 @@ function gameLoop() {
 	now = Date.now();
     delta = now - then;
 	//game speed loop
-	if (delta > interval) {			
+	if (delta > interval) {
 		missilesAnimateAndDraw();		
 		unitsAnimateAndDraw();	
 		scrollMap(tmap, player);		

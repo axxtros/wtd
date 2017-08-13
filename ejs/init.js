@@ -83,7 +83,7 @@ function init() {
 		GAME_CANVAS_WIDTH = GAME_DIV_WIDTH;
 		GAME_CANVAS_HEIGHT = GAME_DIV_HEIGHT;
 		
-		mapCanvas = document.getElementById('mapcanvas');		
+		mapCanvas = document.getElementById('mapcanvas');
 		if(mapCanvas != null) {			
 			mapCanvas.style.top = gamedivTop + 'px';
 			mapCanvas.style.left = gamedivLeft + 'px';
